@@ -10,10 +10,12 @@ sources: []  # e.g. learning/last_run_manifest.json, task:task_corpus_abc123, jo
 ## Available organizational data
 
 See [`learning/AVAILABLE_DATA.md`](../learning/AVAILABLE_DATA.md): email corpus,
-inferred-task JSONL, optional **orgnet** ONA artifacts, learning manifests. After
-batch jobs, [`learning/batch_context.json`](../learning/batch_context.json)
-lists which of those files exist. Use only what is in context or cited paths;
-do not invent network metrics.
+inferred-task JSONL, optional **orgnet** ONA artifacts, learning manifests, and
+**§6** optional sibling tools (e.g. workplace-text / sentiment). After batch jobs,
+[`learning/batch_context.json`](../learning/batch_context.json) lists which
+artifact files exist; optional [`learning/integrations.local.md`](../learning/integrations.local.md)
+may declare machine-specific paths. Use only what is in context or cited paths;
+do not invent network metrics or sentiment scores.
 
 ## What this role does
 

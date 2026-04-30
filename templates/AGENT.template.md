@@ -11,10 +11,11 @@ workflow_files: []  # paths to WORKFLOW.md this agent may join
 ## Load order
 
 1. If present, read `learning/batch_context.json` for latest batch artifact paths.
-2. Read `ORG_STATE` (relevant sections only if implementation supports scoped read).
-3. Check what corpus / ONA / task artifacts the operator attached (`learning/AVAILABLE_DATA.md`).
-4. Apply this file + linked `SKILL.md` + active `WORKFLOW.md` for current `workflow_type`.
-5. Obey `MESSAGE_SCHEMA`; never send outside envelope rules.
+2. If present, read `learning/integrations.local.md` for machine-specific sibling tools (see `learning/AVAILABLE_DATA.md` §6).
+3. Read `ORG_STATE` (relevant sections only if implementation supports scoped read).
+4. Check what corpus / ONA / task artifacts and external tools the operator documented (`learning/AVAILABLE_DATA.md`).
+5. Apply this file + linked `SKILL.md` + active `WORKFLOW.md` for current `workflow_type`.
+6. Obey `MESSAGE_SCHEMA`; never send outside envelope rules.
 
 ## Participating workflows
 

@@ -1,6 +1,9 @@
 # Generated learning manifest (local file URIs; do not commit)
 learning/last_run_manifest.json
 
+# Optional machine-specific paths for external tools (see integrations.local.example.md)
+learning/integrations.local.md
+
 # Generated task extracts (local corpus paths → JSONL; can be large)
 corpus/inferred_tasks.jsonl
 corpus/_smoke_tasks.jsonl

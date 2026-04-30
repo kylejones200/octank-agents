@@ -20,7 +20,7 @@ Smoke test (corpus paths must exist per `corpus/corpus_config.json`):
 
 1. **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** — system shape and spec index  
 2. **[docs/AGENT_REGISTRY.md](docs/AGENT_REGISTRY.md)** — who exists and what files they load  
-3. **[learning/AVAILABLE_DATA.md](learning/AVAILABLE_DATA.md)** — optional corpus / learning pipeline  
+3. **[learning/AVAILABLE_DATA.md](learning/AVAILABLE_DATA.md)** — optional corpus / learning pipeline (includes **§6** sibling workplace-text tool path)  
 
 Commands and pipelines: **[scripts/README.md](scripts/README.md)**. Full doc list: **[docs/README.md](docs/README.md)**.
 

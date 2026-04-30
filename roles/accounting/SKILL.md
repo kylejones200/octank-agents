@@ -9,10 +9,12 @@ skill_version: "0.1.0"
 ## Available organizational data
 
 See [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md): email corpus,
-inferred-task JSONL, optional **orgnet** ONA artifacts, learning manifests. After
-batch jobs, [`learning/batch_context.json`](../../learning/batch_context.json)
-lists which of those files exist. Use only what is in context or cited paths;
-do not invent network metrics.
+inferred-task JSONL, optional **orgnet** ONA artifacts, learning manifests, and
+**§6** sibling workplace-text tools. After batch jobs,
+[`learning/batch_context.json`](../../learning/batch_context.json) lists which
+artifact files exist; optional [`learning/integrations.local.md`](../../learning/integrations.local.md)
+may hold machine-specific paths. Use only what is in context or cited paths;
+do not invent network metrics or sentiment scores.
 
 ## What this role does
 

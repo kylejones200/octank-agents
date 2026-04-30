@@ -13,6 +13,7 @@ network metrics or email quotes.
    manifest listing which artifact paths exist right now (`inferred_tasks`,
    `last_run_manifest`, optional `orgnet_summary`).
 3. **Online / agent session** — Load **`learning/batch_context.json` first**,
+   then **`learning/integrations.local.md`** if it exists (optional; machine-specific paths for sibling tools — copy from `integrations.local.example.md`),
    then **`learning/AVAILABLE_DATA.md`**, then only the non-null files under
    `artifacts` (excerpts or full files, per your context budget). Agents **do
    not** re-run orgnet or full-corpus inference inside each turn unless you
@@ -62,6 +63,24 @@ you reference them explicitly.
 
 - **[`docs/specs/ORG_STATE.md`](../docs/specs/ORG_STATE.md)** — positions, limits, workflows in flight (simulation or
   production). Distinct from historical corpus and ONA snapshots.
+
+## 6. Workplace-text analysis (external sentiment tool)
+
+This repository does **not** embed sentiment or workplace-text models. The operator
+may use a **separate** codebase for that work. **On this operator’s machine** that
+tool is expected at:
+
+**`/Users/kylejonespatricia/Desktop/sentiment`**
+
+When the operator attaches exports, tables, or summaries produced from that tree,
+**cite paths, versions, and numbers verbatim**. Do not invent sentiment labels,
+polarity scores, or team-level metrics that are not present in the artifacts in
+context. If nothing from that tool is in context, state that explicitly instead
+of guessing.
+
+Forks / other machines: edit this section, or keep defaults here generic and
+place your absolute path only in **`learning/integrations.local.md`** (gitignored;
+start from [`integrations.local.example.md`](integrations.local.example.md)).
 
 ---
 

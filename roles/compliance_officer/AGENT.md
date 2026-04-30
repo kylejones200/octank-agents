@@ -15,8 +15,9 @@ workflow_files:
 ## Available organizational data
 
 After a batch run, read [`learning/batch_context.json`](../../learning/batch_context.json)
-first (artifact index), then [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md)
-for the full catalog (corpus, inferred tasks, optional **orgnet**, manifests).
+first (artifact index), then [`learning/integrations.local.md`](../../learning/integrations.local.md) if present,
+then [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md)
+for the full catalog (corpus, inferred tasks, optional **orgnet**, manifests, **§6 workplace-text / sentiment**).
 
 ## Participating workflows
 

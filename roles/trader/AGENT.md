@@ -18,10 +18,11 @@ workflow_files:
 ## Load order
 
 1. If present, read [`learning/batch_context.json`](../../learning/batch_context.json) for the latest batch artifact paths.
-2. Read `ORG_STATE` positions, limits, approved counterparties, active workflows.
-3. Note any corpus, inferred-task, or **orgnet** / ONA artifacts the operator attached — see [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md).
-4. Apply this file + `SKILL.md` + the active `WORKFLOW.md` for current `workflow_type`.
-5. Emit only `MESSAGE_SCHEMA` envelopes.
+2. If present, read [`learning/integrations.local.md`](../../learning/integrations.local.md) for machine-specific sibling tools (see [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md) §6).
+3. Read `ORG_STATE` positions, limits, approved counterparties, active workflows.
+4. Note any corpus, inferred-task, **orgnet** / ONA, or **workplace-text / sentiment** artifacts the operator attached — see [`learning/AVAILABLE_DATA.md`](../../learning/AVAILABLE_DATA.md).
+5. Apply this file + `SKILL.md` + the active `WORKFLOW.md` for current `workflow_type`.
+6. Emit only `MESSAGE_SCHEMA` envelopes.
 
 ## Participating workflows
 
