@@ -10,7 +10,7 @@ python3 scripts/validate_registry.py
 
 Optional: `pip install pre-commit && pre-commit install`, then commits run the same validator.
 
-Smoke test (corpus paths must exist per `enron/corpus_config.json`):
+Smoke test (corpus paths must exist per `corpus/corpus_config.json`):
 
 ```bash
 ./scripts/smoke_pipeline.sh
@@ -32,5 +32,5 @@ Commands and pipelines: **[scripts/README.md](scripts/README.md)**. Full doc lis
 | `roles/`, `workflows/` | Agent and workflow markdown |
 | `registry/` | `registry.json` + JSON Schema |
 | `constraints/` | Stub for future rule packs (see `constraints/README.md`) |
-| `enron/`, `learning/` | Corpus config, learning manifests (generated files gitignored) |
+| `corpus/`, `learning/` | Corpus config and hints, learning manifests (generated files gitignored) |
 | `scripts/` | Validation, corpus helpers, hooks |

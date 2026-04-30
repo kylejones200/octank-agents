@@ -3,7 +3,7 @@
   "generated_at": "2026-04-30T12:00:00+00:00",
   "artifacts": {
     "available_data_catalog": "learning/AVAILABLE_DATA.md",
-    "inferred_tasks": "enron/inferred_tasks.jsonl",
+    "inferred_tasks": "corpus/inferred_tasks.jsonl",
     "learning_manifest": "learning/last_run_manifest.json",
     "orgnet_summary": "learning/orgnet_output/summary.json"
   },

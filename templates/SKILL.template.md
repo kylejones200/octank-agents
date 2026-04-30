@@ -2,7 +2,7 @@
 role_id: ""
 agent_name: ""
 skill_version: "0.1.0"
-sources: []  # e.g. learning/last_run_manifest.json, task:task_enron_abc123, job_description:2024-03
+sources: []  # e.g. learning/last_run_manifest.json, task:task_corpus_abc123, job_description:2024-03
 ---
 
 # Skill: [Agent name] — [Role display name]

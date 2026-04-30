@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """
-Infer agent-performable tasks from an Enron-style corpus.
+Infer agent-performable tasks from a Maildir or parquet email corpus.
 
 Supports:
   - Maildir: any folder tree containing cur/ or new/ message files
-  - Parquet: columns `file` (path relative to maildir_root) + `message` (RFC822),
-    as in ~/Documents/email/emails.parquet
+  - Parquet: columns `file` (path relative to maildir_root) + `message` (RFC822)
 
 Outputs JSONL linking threads to registry workflow_type + role_id.
 
 Usage:
-  python3 scripts/enron_infer_tasks.py --corpus-config enron/corpus_config.json --output enron/inferred_tasks.jsonl
-  python3 scripts/enron_infer_tasks.py --parquet /path/emails.parquet --maildir-root /path/maildir --max-rows 5000
-  python3 scripts/enron_infer_tasks.py --maildir /path/maildir
-  python3 scripts/enron_infer_tasks.py --demo
+  python3 scripts/infer_corpus_tasks.py --corpus-config corpus/corpus_config.json --output corpus/inferred_tasks.jsonl
+  python3 scripts/infer_corpus_tasks.py --parquet /path/emails.parquet --maildir-root /path/maildir --max-rows 5000
+  python3 scripts/infer_corpus_tasks.py --maildir /path/maildir
+  python3 scripts/infer_corpus_tasks.py --demo
 """
 
 from __future__ import annotations
@@ -385,7 +384,7 @@ def suggested_steps(workflow_type: str) -> list[str]:
 
 def stable_task_id(thread_key: str, wf: str) -> str:
     h = hashlib.sha256(f"{thread_key}|{wf}".encode()).hexdigest()[:16]
-    return f"task_enron_{h}"
+    return f"task_corpus_{h}"
 
 
 def run_demo(registry: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
@@ -406,8 +405,8 @@ def run_demo(registry: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
         "matched_keywords": ["nomination", "pipeline"],
         "inferred_primary_role": "scheduler",
         "participants": [
-            {"email": "trader@enron.com", "message_count": 1},
-            {"email": "scheduling@enron.com", "message_count": 2},
+            {"email": "trader@example.com", "message_count": 1},
+            {"email": "scheduling@example.com", "message_count": 2},
         ],
         "agent_bindings": bind("scheduler"),
         "suggested_task_title": "Nominate and confirm transport for flow date",
@@ -425,7 +424,7 @@ def run_demo(registry: dict[str, dict[str, str]]) -> list[dict[str, Any]]:
         "confidence": 0.75,
         "matched_keywords": ["limit", "position", "urgent"],
         "inferred_primary_role": "risk_analyst",
-        "participants": [{"email": "risk@enron.com", "message_count": 3}],
+        "participants": [{"email": "risk@example.com", "message_count": 3}],
         "agent_bindings": bind("risk_analyst"),
         "suggested_task_title": "Resolve limit breach with escalation path",
         "suggested_steps": suggested_steps("risk_escalation"),
@@ -518,7 +517,7 @@ def main() -> int:
     )
     ap.add_argument("--maildir", type=Path, help="Maildir tree with cur/ or new/ folders")
     ap.add_argument("--output", type=Path, help="JSONL output path (default: stdout)")
-    ap.add_argument("--hints", type=Path, help="Hints JSON (default: enron/enron_to_registry_hints.json)")
+    ap.add_argument("--hints", type=Path, help="Hints JSON (default: corpus/registry_hints.json)")
     ap.add_argument(
         "--min-messages",
         type=int,
@@ -537,7 +536,7 @@ def main() -> int:
     args = ap.parse_args()
 
     root = repo_root()
-    hints_path = args.hints or (root / "enron" / "enron_to_registry_hints.json")
+    hints_path = args.hints or (root / "corpus" / "registry_hints.json")
     hints = load_json(hints_path) if hints_path.is_file() else {}
     registry = load_registry_agents(root)
 
@@ -587,14 +586,14 @@ def main() -> int:
             registry,
             args.min_messages,
             args.max_threads,
-            source_label="enron_maildir",
+            source_label="maildir",
             subject_day_bucket=args.bucket_mailbox_subject_day,
         )
     else:
         ap.print_help()
         print(
             "\nProvide --demo, --maildir, --parquet, or --corpus-config "
-            "(see enron/corpus_config.json).",
+            "(see corpus/corpus_config.json).",
             file=sys.stderr,
         )
         return 1

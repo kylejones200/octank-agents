@@ -38,7 +38,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Write learning/batch_context.json")
     ap.add_argument(
         "--tasks",
-        default="enron/inferred_tasks.jsonl",
+        default="corpus/inferred_tasks.jsonl",
         help="Relative path to inferred tasks JSONL",
     )
     ap.add_argument(

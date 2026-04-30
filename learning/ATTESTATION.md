@@ -21,7 +21,7 @@ it honestly (cite artifacts; do not invent metrics). Your app, README, or compli
 
 ```bash
 python3 scripts/emit_learning_manifest.py \
-  --corpus-config enron/corpus_config.json \
+  --corpus-config corpus/corpus_config.json \
   --registry registry/registry.json \
   --output learning/last_run_manifest.json
 ```
@@ -30,9 +30,9 @@ Optional: attach inferred tasks and optional SHA-256 of the parquet file:
 
 ```bash
 python3 scripts/emit_learning_manifest.py \
-  --corpus-config enron/corpus_config.json \
+  --corpus-config corpus/corpus_config.json \
   --registry registry/registry.json \
-  --tasks enron/inferred_tasks.jsonl \
+  --tasks corpus/inferred_tasks.jsonl \
   --hash-parquet \
   --output learning/last_run_manifest.json
 ```

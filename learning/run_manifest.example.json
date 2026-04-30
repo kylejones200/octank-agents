@@ -11,7 +11,7 @@
     {
       "kind": "parquet",
       "uri": "file:///Users/kylejonespatricia/Documents/email/emails.parquet",
-      "description": "Enron-style email export: file + message columns",
+      "description": "Parquet email export: file + message columns",
       "record_count": 275203,
       "role_in_learning": "primary_corpus"
     },
@@ -37,7 +37,7 @@
   "learning_outputs": [
     {
       "kind": "inferred_tasks",
-      "uri": "file:///path/to/repo/enron/inferred_tasks.jsonl",
+      "uri": "file:///path/to/repo/corpus/inferred_tasks.jsonl",
       "description": "Thread- and keyword-derived tasks aligned to registry workflows"
     }
   ],
@@ -45,7 +45,7 @@
     {
       "skill_path": "roles/trader/SKILL.md",
       "skill_version": "0.2.0",
-      "task_ids_sample": ["task_enron_abc123"],
+      "task_ids_sample": ["task_corpus_abc123"],
       "method": "LLM synthesis from task bundle + docs/specs/PROMPT_TEMPLATES.md (example)"
     }
   ],

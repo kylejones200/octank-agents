@@ -14,8 +14,8 @@ cd "$ROOT"
 echo "== 1. Validate registry =="
 python3 scripts/validate_registry.py
 
-echo "== 2. Infer tasks from corpus (enron/corpus_config.json) =="
-INFER=(python3 scripts/enron_infer_tasks.py --corpus-config enron/corpus_config.json --output enron/inferred_tasks.jsonl)
+echo "== 2. Infer tasks from corpus (corpus/corpus_config.json) =="
+INFER=(python3 scripts/infer_corpus_tasks.py --corpus-config corpus/corpus_config.json --output corpus/inferred_tasks.jsonl)
 if [ -n "${BATCH_MAX_ROWS:-}" ] && [ "${BATCH_MAX_ROWS}" != "0" ]; then
   INFER+=(--max-rows "${BATCH_MAX_ROWS}")
 fi
@@ -26,8 +26,8 @@ fi
 
 echo "== 3. Emit learning manifest =="
 python3 scripts/emit_learning_manifest.py \
-  --corpus-config enron/corpus_config.json \
-  --tasks enron/inferred_tasks.jsonl \
+  --corpus-config corpus/corpus_config.json \
+  --tasks corpus/inferred_tasks.jsonl \
   --output learning/last_run_manifest.json
 
 echo "== 4. Write batch context index for agents =="

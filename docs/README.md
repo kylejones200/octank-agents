@@ -10,5 +10,6 @@
 | [Exception queue](specs/EXCEPTION_QUEUE.md) | Human exception interface |
 | [Prompt templates](specs/PROMPT_TEMPLATES.md) | Bootstrap LLM prompts for SKILL / WORKFLOW / AGENT |
 | [Archive: concept chat](archive/concept-chat-bootstrap.md) | Historical brainstorm; not maintained |
+| [Corpus → tasks](../corpus/CORPUS_TO_TASKS.md) | Optional pipeline: email corpus to JSONL tasks |
 
 Constraint **artifacts** (rule files) live under [`../constraints/`](../constraints/) at repo root.

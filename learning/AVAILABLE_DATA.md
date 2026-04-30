@@ -22,7 +22,7 @@ See also `learning/batch_context.example.json` for the JSON shape.
 
 ## 1. Email corpus (primary behavioral signal)
 
-- **Parquet table:** configured in `enron/corpus_config.json` (typically
+- **Parquet table:** configured in `corpus/corpus_config.json` (typically
   `emails.parquet` with `file` + `message` columns).
 - **Maildir tree:** same config’s `maildir_root` — on-disk messages for
   resolvable paths and audits.
@@ -31,8 +31,8 @@ Use for: thread evidence, task inference, vocabulary, escalation patterns.
 
 ## 2. Inferred tasks (corpus → registry workflows)
 
-- **JSONL:** `enron/inferred_tasks.jsonl` (or smoke output `enron/_smoke_tasks.jsonl`)
-  produced by `scripts/enron_infer_tasks.py`.
+- **JSONL:** `corpus/inferred_tasks.jsonl` (or smoke output `corpus/_smoke_tasks.jsonl`)
+  produced by `scripts/infer_corpus_tasks.py`.
 - Each line links threads to `workflow_type`, `role_id`, and `agent_bindings`
   aligned with `registry/registry.json`.
 

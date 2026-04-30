@@ -150,8 +150,8 @@ Exception created (constraint fail / novel situation / escalation timeout)
 Message schema · Org state schema · Message bus · Constraint engine (empty)
 Result: A working plumbing system with no agents yet
 
-### Phase 1 — Seed from Enron corpus
-Run Stages 1–3 of the extraction pipeline
+### Phase 1 — Seed from historical email corpus
+Run Stages 1–3 of the extraction pipeline (see `corpus/CORPUS_TO_TASKS.md`)
 Result: SKILL.md + WORKFLOW.md + AGENT.md for ~8 roles + ~10 workflows
 
 ### Phase 2 — Seed constraints from standards

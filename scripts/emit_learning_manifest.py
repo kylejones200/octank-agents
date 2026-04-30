@@ -3,7 +3,7 @@
 Emit learning/run_manifest JSON: which data + which agents supported skill learning.
 
 Usage:
-  python3 scripts/emit_learning_manifest.py --corpus-config enron/corpus_config.json \\
+  python3 scripts/emit_learning_manifest.py --corpus-config corpus/corpus_config.json \\
       --registry registry/registry.json --output learning/last_run_manifest.json
 """
 
@@ -191,7 +191,7 @@ def main() -> int:
         "learning_outputs": learning_outputs,
         "skills_learned_or_updated": [],
         "method_summary": (
-            "Corpus-backed task inference (scripts/enron_infer_tasks.py) and/or "
+            "Corpus-backed task inference (scripts/infer_corpus_tasks.py) and/or "
             "LLM synthesis (docs/specs/PROMPT_TEMPLATES.md) over registry agents; human review "
             "before treating outputs as production skills."
         ),

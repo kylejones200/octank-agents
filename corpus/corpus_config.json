@@ -1,5 +1,5 @@
 {
   "parquet": "/Users/kylejonespatricia/Documents/email/emails.parquet",
   "maildir_root": "/Users/kylejonespatricia/Documents/email/maildir",
-  "description": "Local Enron-style corpus: parquet rows reference paths under maildir_root."
+  "description": "Local email corpus: parquet rows reference paths under maildir_root."
 }

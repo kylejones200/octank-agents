@@ -1,2 +1,2 @@
-# Optional: only needed for scripts/enron_infer_tasks.py --parquet
+# Optional: only needed for scripts/infer_corpus_tasks.py --parquet
 pyarrow>=14.0.0
