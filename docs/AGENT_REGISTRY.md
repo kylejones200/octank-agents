@@ -1,14 +1,14 @@
 # AGENT_REGISTRY.md — Who Exists and What They Load
-## Digital Org Architecture · v0.1
+## Digital Org Architecture · v0.2
 
 ---
 
 ## Purpose
 
 This document is the **human-readable catalog** of roles in the twin. The
-**canonical machine source** is `registry/registry.json` — validated on every
+**canonical machine source** is [`registry/registry.json`](../registry/registry.json) — validated on every
 commit if you run `scripts/install-git-hooks.sh` or use the `pre-commit` config
-in the repo root.
+in the repo root. Spec index: [`docs/README.md`](README.md).
 
 Runtime systems should read `registry.json`; humans can start here, then open
 linked `SKILL.md` / `AGENT.md` / `WORKFLOW.md` files.
@@ -73,7 +73,8 @@ workflows/
   <workflow_type>/
     WORKFLOW.md   # steps, handoffs, failure modes
 constraints/
-  rules/          # JSON or YAML rule packs (CONSTRAINT_ENGINE)
+  README.md       # layout + how rule packs map to CONSTRAINT_ENGINE
+  rules/          # JSON or YAML rule packs (see docs/specs/CONSTRAINT_ENGINE.md)
   sources/        # traceability to ISO / policy PDFs
 ```
 
@@ -85,16 +86,18 @@ constraints/
   DECISION_TREES.md
 ```
 
+See [`constraints/README.md`](../constraints/README.md) for the live stub layout.
+
 ---
 
 ## Relationship to other specs
 
 | Spec | How registry uses it |
 |---|---|
-| `MESSAGE_SCHEMA.md` | `role_id` must match envelope `from.role` / `to.role` |
-| `ORG_STATE.md` | `agents` map keys = `agent_id`; `skill_version` points at skill file version |
-| `CONSTRAINT_ENGINE.md` | `constraint_scope` filters which `rule_id`s run for this role’s messages |
-| `EXCEPTION_QUEUE.md` | `hard_boundaries` should align with categories that create exceptions |
+| [`docs/specs/MESSAGE_SCHEMA.md`](specs/MESSAGE_SCHEMA.md) | `role_id` must match envelope `from.role` / `to.role` |
+| [`docs/specs/ORG_STATE.md`](specs/ORG_STATE.md) | `agents` map keys = `agent_id`; `skill_version` points at skill file version |
+| [`docs/specs/CONSTRAINT_ENGINE.md`](specs/CONSTRAINT_ENGINE.md) | `constraint_scope` filters which `rule_id`s run for this role’s messages |
+| [`docs/specs/EXCEPTION_QUEUE.md`](specs/EXCEPTION_QUEUE.md) | `hard_boundaries` should align with categories that create exceptions |
 
 ---
 
@@ -103,7 +106,7 @@ constraints/
 - Bump `skill_file` / `agent_file` **version** in front matter when behavior changes.
 - `ORG_STATE` records `skill_version` per agent for replay and audit.
 - Breaking message `payload.structured` shape changes require `schema_version` bump
-  in `MESSAGE_SCHEMA.md` and coordinated registry update.
+  in [`docs/specs/MESSAGE_SCHEMA.md`](specs/MESSAGE_SCHEMA.md) and coordinated registry update.
 
 ---
 
@@ -114,4 +117,4 @@ constraints/
 2. Keep `SKILL.md` / `AGENT.md` / `WORKFLOW.md` front matter `role_id` /
    `workflow_type` aligned with the registry (the validator enforces this).
 3. Add rules to the constraint engine with explicit `applies_to_roles`.
-4. Run shadow mode (ARCHITECTURE bootstrap Phase 3) before any autonomous execution.
+4. Run shadow mode ([`docs/architecture/ARCHITECTURE.md`](architecture/ARCHITECTURE.md) bootstrap Phase 3) before any autonomous execution.

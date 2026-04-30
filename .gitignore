@@ -1,3 +1,6 @@
+# Generated learning manifest (local file URIs; do not commit)
+learning/last_run_manifest.json
+
 # Generated task extracts (local Enron path → JSONL; can be large)
 enron/inferred_tasks.jsonl
 enron/_smoke_tasks.jsonl

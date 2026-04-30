@@ -60,7 +60,7 @@ for mapping, (3) priority hint (regulation vs policy).
 
 **System / instructions:**
 
-Emit a **JSON array** of rule objects compatible with CONSTRAINT_ENGINE.md rule
+Emit a **JSON array** of rule objects compatible with [CONSTRAINT_ENGINE.md](CONSTRAINT_ENGINE.md) rule
 schema. Each shall → `block` or `require_approval` as appropriate. Each should →
 `warn` or `log_only`. Include `source.document` and `source.clause`. If text is
 ambiguous, emit a rule with `test_mode: true` and `description` explaining the

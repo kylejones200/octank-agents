@@ -81,4 +81,4 @@ trader → risk_analyst → (legal) → scheduler ⇄ ops → trader (external) 
 ## Constraint highlights
 
 - Counterparty list membership, position limits, reporting thresholds, pipeline
-  cutoffs (`CONSTRAINT_ENGINE.md`).
+  cutoffs ([`docs/specs/CONSTRAINT_ENGINE.md`](../../docs/specs/CONSTRAINT_ENGINE.md)).

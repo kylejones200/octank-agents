@@ -26,7 +26,15 @@
           "agent_path": { "type": "string" },
           "workflow_types": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
           "typical_peers": { "type": "array", "items": { "type": "string" } },
-          "constraint_scope": { "type": "array", "items": { "type": "string" } }
+          "constraint_scope": { "type": "array", "items": { "type": "string" } },
+          "description": {
+            "type": "string",
+            "description": "Human-readable summary of the role (optional; for catalogs and manifests)."
+          },
+          "hard_boundary": {
+            "type": "string",
+            "description": "Summary of what must route to the exception queue (optional)."
+          }
         },
         "additionalProperties": false
       }

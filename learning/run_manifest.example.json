@@ -46,7 +46,7 @@
       "skill_path": "roles/trader/SKILL.md",
       "skill_version": "0.2.0",
       "task_ids_sample": ["task_enron_abc123"],
-      "method": "LLM synthesis from task bundle + PROMPT_TEMPLATES.md (example)"
+      "method": "LLM synthesis from task bundle + docs/specs/PROMPT_TEMPLATES.md (example)"
     }
   ],
   "method_summary": "Tasks inferred from corpus keywords and threading; agents from registry/registry.json; optional LLM step to draft SKILL updates with human review.",

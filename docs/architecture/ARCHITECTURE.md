@@ -1,5 +1,5 @@
 # ARCHITECTURE.md — Digital Org System Design
-## v0.1
+## v0.2 (see `registry/registry.json` → `registry_version` for agent pack version)
 
 ---
 
@@ -78,12 +78,12 @@ is handled by agents operating against a shared org state.
 
 | Spec | File | What it defines |
 |---|---|---|
-| Message Schema | `MESSAGE_SCHEMA.md` | Structure of all inter-agent communication |
-| Exception Queue | `EXCEPTION_QUEUE.md` | Human touchpoint — what routes there, how it's resolved |
-| Constraint Engine | `CONSTRAINT_ENGINE.md` | Rule types, evaluation, override, audit log |
-| Org State | `ORG_STATE.md` | Live memory — positions, limits, counterparties, workflows |
-| Agent Registry | `AGENT_REGISTRY.md` | Human-readable catalog; canonical JSON is `registry/registry.json` |
-| Bootstrap Prompts | `PROMPT_TEMPLATES.md` | LLM prompts to generate SKILL / WORKFLOW / AGENT / rules from data |
+| Message Schema | [`docs/specs/MESSAGE_SCHEMA.md`](../specs/MESSAGE_SCHEMA.md) | Structure of all inter-agent communication |
+| Exception Queue | [`docs/specs/EXCEPTION_QUEUE.md`](../specs/EXCEPTION_QUEUE.md) | Human touchpoint — what routes there, how it's resolved |
+| Constraint Engine | [`docs/specs/CONSTRAINT_ENGINE.md`](../specs/CONSTRAINT_ENGINE.md) | Rule types, evaluation, override, audit log |
+| Org State | [`docs/specs/ORG_STATE.md`](../specs/ORG_STATE.md) | Live memory — positions, limits, counterparties, workflows |
+| Agent Registry | [`docs/AGENT_REGISTRY.md`](../AGENT_REGISTRY.md) | Human-readable catalog; canonical JSON is `registry/registry.json` |
+| Bootstrap Prompts | [`docs/specs/PROMPT_TEMPLATES.md`](../specs/PROMPT_TEMPLATES.md) | LLM prompts to generate SKILL / WORKFLOW / AGENT / rules from data |
 | Agent Definition | `AGENT.md` (per role) | Trigger→action map, escalation rules, output formats |
 | Skill Definition | `SKILL.md` (per role) | Role identity, inputs, outputs, decision patterns |
 | Workflow Definition | `WORKFLOW.md` (per type) | Step-by-step process, handoffs, failure modes |

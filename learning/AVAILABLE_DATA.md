@@ -60,7 +60,7 @@ you reference them explicitly.
 
 ## 5. Live runtime state (when executing, not training)
 
-- **`ORG_STATE.md`** spec — positions, limits, workflows in flight (simulation or
+- **[`docs/specs/ORG_STATE.md`](../docs/specs/ORG_STATE.md)** — positions, limits, workflows in flight (simulation or
   production). Distinct from historical corpus and ONA snapshots.
 
 ---

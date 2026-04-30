@@ -192,7 +192,7 @@ def main() -> int:
         "skills_learned_or_updated": [],
         "method_summary": (
             "Corpus-backed task inference (scripts/enron_infer_tasks.py) and/or "
-            "LLM synthesis (PROMPT_TEMPLATES.md) over registry agents; human review "
+            "LLM synthesis (docs/specs/PROMPT_TEMPLATES.md) over registry agents; human review "
             "before treating outputs as production skills."
         ),
         "public_claims": [

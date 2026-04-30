@@ -60,7 +60,7 @@ risk_analyst → trader → desk_manager → [compliance_officer] → [executive
 
 ## Time expectations
 
-- Critical SLA per `EXCEPTION_QUEUE.md` (example: 1h to management visibility).
+- Critical SLA per [`docs/specs/EXCEPTION_QUEUE.md`](../../docs/specs/EXCEPTION_QUEUE.md) (example: 1h to management visibility).
 
 ## Constraint highlights
 

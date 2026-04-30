@@ -1,3 +1,4 @@
+> **Archive:** Unedited brainstorm / chat export. Not maintained as a spec. For canonical design docs see [Architecture](../architecture/ARCHITECTURE.md) and the [documentation index](../README.md).
 
 You said: I have the full enron email dataset.
 I have the full enron email dataset. How can I use that to infer or identify or create skill.md and workflows? The idea is to be able to make digital employees capable of doing real work without needed a human to specifically train them

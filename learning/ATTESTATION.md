@@ -5,6 +5,8 @@ Agents are instructed to consult **`learning/batch_context.json`** (after each
 batch) and **`learning/AVAILABLE_DATA.md`** for what data exists and how to use
 it honestly (cite artifacts; do not invent metrics). Your app, README, or compliance appendix can point at it and quote the `public_claims` strings verbatim if they still match the files on disk.
 
+**Repository hygiene:** `learning/last_run_manifest.json` is **gitignored** — generated manifests include local file URIs and should not be committed. Keep [`learning/run_manifest.example.json`](run_manifest.example.json) (and the schema) in git as documentation of the shape only.
+
 ## Suggested wording (after you generate a manifest)
 
 1. **Data** — “This application used the datasets listed under `data_sources` in `learning/last_run_manifest.json`, including paths and (when recorded) record counts.”
