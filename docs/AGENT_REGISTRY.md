@@ -28,7 +28,7 @@ are allowed (e.g. two traders on different desks).
 | `skill_file` | Path to `SKILL.md` — identity, inputs, outputs |
 | `workflow_files` | Paths to `WORKFLOW.md` types this role may participate in |
 | `agent_file` | Path to `AGENT.md` — triggers, boundaries, templates |
-| `avatar_path` | Optional repo-relative image (e.g. `assets/avatars/<role_id>.png`) for UI or manifests |
+| `avatar` | Optional `{ "path", "width?", "height?" }` — pointer to this persona’s headshot (`path` repo-relative, e.g. `assets/avatars/<role_id>.png`) |
 | `constraint_scope` | Subset of rule scopes that apply (see CONSTRAINT_ENGINE) |
 | `typical_peers` | Roles on the message bus this role most often addresses |
 | `hard_boundaries` | What must always route to exception queue (summary) |
@@ -115,7 +115,7 @@ See [`constraints/README.md`](../constraints/README.md) for the live stub layout
 
 1. Edit **`registry/registry.json`** when adding a role or workflow, then run
    `python3 scripts/validate_registry.py`. Optional headshots: place PNGs under
-   `assets/avatars/` and set `avatar_path`, or regenerate from a sprite sheet via
+   `assets/avatars/` and set `avatar.path`, or regenerate from a sprite sheet via
    `python3 scripts/split_avatar_sheet.py --input <combined.png>`. Extra faces for
    additional instances or non-registry personas live under `assets/avatars/pool/`
    (`tile_*.png` + `manifest.json`).

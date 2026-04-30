@@ -1,6 +1,6 @@
-# Agent headshots (`avatar_path`)
+# Agent headshots (`avatar`)
 
-PNG files are **`{role_id}.png`**, referenced from [`registry/registry.json`](../../registry/registry.json) as `avatar_path` (repo-relative).
+PNG files are **`{role_id}.png`**. Each agent in [`registry/registry.json`](../../registry/registry.json) points at its image with **`avatar.path`** (and optional **`avatar.width` / `avatar.height`** for validation).
 
 ## Web / another tool
 

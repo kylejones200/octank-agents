@@ -9,10 +9,25 @@ No third-party dependencies.
 from __future__ import annotations
 
 import json
+import struct
 import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
+
+
+def png_pixel_size(path: Path) -> tuple[int, int] | None:
+    """Read width/height from PNG IHDR without Pillow (optional avatar check)."""
+    try:
+        head = path.read_bytes()[:32]
+        if len(head) < 24 or head[:8] != b"\x89PNG\r\n\x1a\n":
+            return None
+        if head[12:16] != b"IHDR":
+            return None
+        w, h = struct.unpack(">II", head[16:24])
+        return w, h
+    except OSError:
+        return None
 
 
 def repo_root() -> Path:
@@ -133,11 +148,31 @@ def main() -> int:
                         )
         if not isinstance(wts, list) or not wts:
             errors.append(f"Agent {rid}: workflow_types must be a non-empty array")
-        av = a.get("avatar_path")
-        if isinstance(av, str) and av.strip():
-            avp = root / av.strip()
-            if not avp.is_file():
-                errors.append(f"Agent {rid}: avatar_path not found: {av}")
+        av = a.get("avatar")
+        if isinstance(av, dict):
+            p = av.get("path")
+            if not isinstance(p, str) or not p.strip():
+                errors.append(f"Agent {rid}: avatar.path must be a non-empty string")
+            else:
+                avp = root / p.strip()
+                if not avp.is_file():
+                    errors.append(f"Agent {rid}: avatar.path not found: {p}")
+                else:
+                    aw, ah = av.get("width"), av.get("height")
+                    if isinstance(aw, int) and isinstance(ah, int):
+                        dims = png_pixel_size(avp)
+                        if dims is None:
+                            errors.append(
+                                f"Agent {rid}: cannot read PNG dimensions for avatar {p!r} "
+                                "(expected PNG for width/height check)"
+                            )
+                        else:
+                            fw, fh = dims
+                            if aw != fw or ah != fh:
+                                errors.append(
+                                    f"Agent {rid}: avatar width/height {aw}x{ah} "
+                                    f"do not match file {fw}x{fh} for {p}"
+                                )
 
     for a in agents:
         if not isinstance(a, dict):

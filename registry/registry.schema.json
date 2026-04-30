@@ -24,9 +24,20 @@
           },
           "skill_path": { "type": "string" },
           "agent_path": { "type": "string" },
-          "avatar_path": {
-            "type": "string",
-            "description": "Optional repo-relative path to a headshot PNG (or other image) for UI / manifests."
+          "avatar": {
+            "type": "object",
+            "description": "Pointer to this persona’s headshot image (repo-relative path; optional pixel size).",
+            "required": ["path"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Repo-relative path, e.g. assets/avatars/<role_id>.png"
+              },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 }
+            },
+            "additionalProperties": false
           },
           "workflow_types": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
           "typical_peers": { "type": "array", "items": { "type": "string" } },

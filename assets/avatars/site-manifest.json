@@ -1,84 +1,106 @@
 {
-  "schema_version": "1",
-  "registry_version": "0.4.2",
-  "description": "Static headshot index for web apps; paths are repo-relative from site root.",
+  "schema_version": "2",
+  "registry_version": "0.4.3",
+  "description": "Static headshot index for web apps; paths are repo-relative from site root. Agents use the same `avatar` shape as registry.json.",
   "agents": [
     {
       "role_id": "trader",
       "display_name": "Morgan",
-      "path": "assets/avatars/trader.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/trader.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "risk_analyst",
       "display_name": "Claire",
-      "path": "assets/avatars/risk_analyst.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/risk_analyst.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "scheduler",
       "display_name": "Henry",
-      "path": "assets/avatars/scheduler.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/scheduler.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "legal",
       "display_name": "Anne",
-      "path": "assets/avatars/legal.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/legal.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "accounting",
       "display_name": "Paul",
-      "path": "assets/avatars/accounting.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/accounting.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "ops",
       "display_name": "Sam",
-      "path": "assets/avatars/ops.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/ops.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "desk_manager",
       "display_name": "Diane",
-      "path": "assets/avatars/desk_manager.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/desk_manager.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "compliance_officer",
       "display_name": "Ruth",
-      "path": "assets/avatars/compliance_officer.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/compliance_officer.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "corporate_treasury",
       "display_name": "Victor",
-      "path": "assets/avatars/corporate_treasury.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/corporate_treasury.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "it_platform",
       "display_name": "Nina",
-      "path": "assets/avatars/it_platform.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/it_platform.png",
+        "width": 384,
+        "height": 384
+      }
     },
     {
       "role_id": "executive_office",
       "display_name": "Grace",
-      "path": "assets/avatars/executive_office.png",
-      "width": 384,
-      "height": 384
+      "avatar": {
+        "path": "assets/avatars/executive_office.png",
+        "width": 384,
+        "height": 384
+      }
     }
   ],
   "pool": [

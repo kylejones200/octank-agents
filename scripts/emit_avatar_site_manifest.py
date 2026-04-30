@@ -2,8 +2,8 @@
 """
 Write assets/avatars/site-manifest.json for a separate website or CDN consumer.
 
-Includes registry agents (role_id, display_name, path, pixel size) and pool tiles
-(optional labels from pool/manifest.json). Run after splitting avatars.
+Agent entries mirror registry `avatar` (path + size). Pool tiles stay flat with
+path/width/height. Run after splitting avatars or editing registry.
 """
 
 from __future__ import annotations
@@ -59,18 +59,23 @@ def main() -> int:
         rid = a.get("role_id")
         if not isinstance(rid, str):
             continue
-        rel = a.get("avatar_path")
+        rel = None
+        av = a.get("avatar")
+        if isinstance(av, dict):
+            rel = av.get("path")
         if not isinstance(rel, str) or not rel.strip():
             rel = f"assets/avatars/{rid}.png"
-        rel = rel.strip()
+        rel = rel.strip().replace("\\", "/")
         sz = size_of(root, rel)
         agents_out.append(
             {
                 "role_id": rid,
                 "display_name": a.get("agent_name"),
-                "path": rel.replace("\\", "/"),
-                "width": sz[0] if sz else None,
-                "height": sz[1] if sz else None,
+                "avatar": {
+                    "path": rel,
+                    "width": sz[0] if sz else None,
+                    "height": sz[1] if sz else None,
+                },
             }
         )
 
@@ -99,9 +104,9 @@ def main() -> int:
             )
 
     doc = {
-        "schema_version": "1",
+        "schema_version": "2",
         "registry_version": data.get("registry_version"),
-        "description": "Static headshot index for web apps; paths are repo-relative from site root.",
+        "description": "Static headshot index for web apps; paths are repo-relative from site root. Agents use the same `avatar` shape as registry.json.",
         "agents": agents_out,
         "pool": pool_out,
     }

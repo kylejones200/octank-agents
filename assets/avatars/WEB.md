@@ -7,11 +7,7 @@ same pipeline.
 
 ## Machine-readable index
 
-**[`site-manifest.json`](site-manifest.json)** — copy this file (and the `assets/avatars/` tree) into your static site or API repo. Each entry includes:
-
-- `path` — repo-relative path (e.g. `assets/avatars/trader.png`)
-- `width` / `height` — actual pixel size after last split
-- `display_name` / `role_id` for agents; `portrait_label` / `hint_title` for pool tiles
+**[`site-manifest.json`](site-manifest.json)** — copy this file (and the `assets/avatars/` tree) into your static site or API repo. **`schema_version` `2`:** each agent has **`avatar.path`**, **`avatar.width`**, **`avatar.height`** (same shape as `registry.json`). Pool tiles still use top-level `path` / `width` / `height` plus optional labels.
 
 Your web app can resolve `path` against a CDN base URL or import images from a monorepo path.
 
