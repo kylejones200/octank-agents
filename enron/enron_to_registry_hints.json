@@ -1,0 +1,54 @@
+{
+  "email_localpart_to_role": {},
+  "subject_keyword_sets": [
+    {
+      "workflow_type": "pipeline_nomination",
+      "keywords": ["nominate", "nomination", "gas day", "pipeline", "transport", "schedul", "allocat", "path", "receipt", "delivery point", "mdq", "imbalance"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "risk_escalation",
+      "keywords": ["limit", "breach", "exposure", "var", "risk", "urgent", "escalat", "management", "position", "violation", "credit line"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "eod_position_reporting",
+      "keywords": ["eod", "end of day", "positions", "mtm", "mark to market", "p&l", "pnl", "daily report", "utilization"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "counterparty_onboarding",
+      "keywords": ["counterparty", "kyc", "credit", "isda", "master agreement", "legal", "entity", "guaranty", "onboarding", "new customer"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "regulatory_inquiry",
+      "keywords": ["sec", "cftc", "ferc", "regulator", "regulatory", "filing", "examination", "subpoena", "compliance inquiry", "policy exception", "audit letter"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "systems_change_request",
+      "keywords": ["etrm", "upgrade", "deployment", "release", "cutover", "maintenance window", "server", "database", "vpn", "integration", "api change", "patch"],
+      "weight": 1.0
+    },
+    {
+      "workflow_type": "deal_execution",
+      "keywords": ["deal", "confirm", "confirmation", "terms", "mmbtu", "mw", "price", "volume", "tenor", "contract", "execute", "offer", "bid", "letter"],
+      "weight": 0.85
+    }
+  ],
+  "role_from_participant_rank": {
+    "body_keyword_to_role": [
+      { "keywords": ["nomination", "pipeline", "cutoff", "operator"], "role_id": "scheduler" },
+      { "keywords": ["limit", "breach", "utilization", "reporting"], "role_id": "risk_analyst" },
+      { "keywords": ["legal", "isda", "credit approval", "kyc"], "role_id": "legal" },
+      { "keywords": ["invoice", "settlement", "gl", "accounting"], "role_id": "accounting" },
+      { "keywords": ["ofo", "curtail", "actual flow", "physical"], "role_id": "ops" },
+      { "keywords": ["desk", "committee", "exception", "approve override"], "role_id": "desk_manager" },
+      { "keywords": ["sec", "cftc", "ferc", "regulatory filing", "compliance inquiry", "sanctions"], "role_id": "compliance_officer" },
+      { "keywords": ["wire", "swift", "treasury", "liquidity", "credit facility", "bank line"], "role_id": "corporate_treasury" },
+      { "keywords": ["etrm", "server", "deployment", "upgrade", "vpn", "integration"], "role_id": "it_platform" },
+      { "keywords": ["ceo", "board", "executive committee", "management decision"], "role_id": "executive_office" }
+    ]
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "$schema": "./registry.schema.json",
+  "registry_version": "0.4.1",
+  "domain": "energy_trading",
+  "description": "Physical gas / power desk plus corporate agents (compliance, treasury, IT, executive). Run scripts/validate_registry.py before commit.",
+  "agents": [
+    {
+      "role_id": "trader",
+      "agent_name": "Morgan",
+      "skill_path": "roles/trader/SKILL.md",
+      "agent_path": "roles/trader/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "pipeline_nomination",
+        "risk_escalation",
+        "eod_position_reporting",
+        "counterparty_onboarding",
+        "regulatory_inquiry",
+        "systems_change_request"
+      ],
+      "typical_peers": [
+        "risk_analyst",
+        "scheduler",
+        "legal",
+        "desk_manager",
+        "compliance_officer"
+      ],
+      "constraint_scope": [
+        "deal_execution",
+        "position_limits",
+        "counterparty"
+      ],
+      "description": "Executes physical gas and power transactions \u2014 pricing, structuring, and deal terms with counterparties; coordinates scheduling and risk on confirmed deals.",
+      "hard_boundary": "New counterparty without credit; deal over signing authority"
+    },
+    {
+      "role_id": "risk_analyst",
+      "agent_name": "Claire",
+      "skill_path": "roles/risk_analyst/SKILL.md",
+      "agent_path": "roles/risk_analyst/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "risk_escalation",
+        "eod_position_reporting",
+        "regulatory_inquiry",
+        "systems_change_request"
+      ],
+      "typical_peers": [
+        "trader",
+        "desk_manager",
+        "compliance_officer"
+      ],
+      "constraint_scope": [
+        "position_limits",
+        "reporting",
+        "deal_execution"
+      ],
+      "description": "Monitors positions and limits by hub and book, validates deal risk, produces EOD summaries, and drives escalation when limits or policies are breached.",
+      "hard_boundary": "Waiving a regulatory reporting requirement"
+    },
+    {
+      "role_id": "scheduler",
+      "agent_name": "Henry",
+      "skill_path": "roles/scheduler/SKILL.md",
+      "agent_path": "roles/scheduler/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "pipeline_nomination",
+        "systems_change_request"
+      ],
+      "typical_peers": [
+        "trader",
+        "ops",
+        "it_platform"
+      ],
+      "constraint_scope": [
+        "pipeline_cutoff",
+        "nomination"
+      ],
+      "description": "Translates confirmed deals into pipeline and LDC nominations, tracks operator confirmations, and coordinates timing against pipeline cutoffs and imbalances.",
+      "hard_boundary": "Nomination after cutoff without documented override"
+    },
+    {
+      "role_id": "legal",
+      "agent_name": "Anne",
+      "skill_path": "roles/legal/SKILL.md",
+      "agent_path": "roles/legal/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "counterparty_onboarding",
+        "regulatory_inquiry"
+      ],
+      "typical_peers": [
+        "trader",
+        "accounting",
+        "compliance_officer"
+      ],
+      "constraint_scope": [
+        "counterparty",
+        "authority",
+        "deal_execution"
+      ],
+      "description": "Owns counterparty eligibility, master agreements, credit limits, and legal clearance for deals that exceed authority or involve new entities.",
+      "hard_boundary": "Binding legal commitment without human signatory"
+    },
+    {
+      "role_id": "accounting",
+      "agent_name": "Paul",
+      "skill_path": "roles/accounting/SKILL.md",
+      "agent_path": "roles/accounting/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "eod_position_reporting",
+        "counterparty_onboarding"
+      ],
+      "typical_peers": [
+        "trader",
+        "ops",
+        "legal",
+        "corporate_treasury"
+      ],
+      "constraint_scope": [
+        "reconciliation",
+        "deal_execution"
+      ],
+      "description": "Maps confirmed deals to settlements and accruals; reconciles pipeline statements and desk P&L inputs; supports audit trail completeness.",
+      "hard_boundary": "Posting outside reconciliation window"
+    },
+    {
+      "role_id": "ops",
+      "agent_name": "Sam",
+      "skill_path": "roles/ops/SKILL.md",
+      "agent_path": "roles/ops/AGENT.md",
+      "workflow_types": [
+        "pipeline_nomination",
+        "deal_execution",
+        "systems_change_request"
+      ],
+      "typical_peers": [
+        "scheduler",
+        "accounting",
+        "it_platform"
+      ],
+      "constraint_scope": [
+        "nomination",
+        "physical_ops"
+      ],
+      "description": "Monitors actual flows, imbalances, and operator communications; supports scheduler with confirmations and physical exceptions such as curtailments and OFOs.",
+      "hard_boundary": "Physical hazard or safety-related events"
+    },
+    {
+      "role_id": "desk_manager",
+      "agent_name": "Diane",
+      "skill_path": "roles/desk_manager/SKILL.md",
+      "agent_path": "roles/desk_manager/AGENT.md",
+      "workflow_types": [
+        "risk_escalation",
+        "deal_execution"
+      ],
+      "typical_peers": [
+        "trader",
+        "risk_analyst",
+        "executive_office"
+      ],
+      "constraint_scope": [
+        "position_limits",
+        "authority",
+        "exceptions"
+      ],
+      "description": "Owns desk P&L and risk culture; approves temporary limit exceptions within committee rules; resolves cross-book conflicts and stalled escalations.",
+      "hard_boundary": "Permanent limit changes and regulatory submissions"
+    },
+    {
+      "role_id": "compliance_officer",
+      "agent_name": "Ruth",
+      "skill_path": "roles/compliance_officer/SKILL.md",
+      "agent_path": "roles/compliance_officer/AGENT.md",
+      "workflow_types": [
+        "regulatory_inquiry",
+        "risk_escalation",
+        "deal_execution",
+        "counterparty_onboarding"
+      ],
+      "typical_peers": [
+        "legal",
+        "trader",
+        "executive_office"
+      ],
+      "constraint_scope": [
+        "regulatory",
+        "policy",
+        "surveillance"
+      ],
+      "description": "Interprets regulatory and firm policy for the trading organization: filings, surveillance posture, and read-across from desk activity to control libraries.",
+      "hard_boundary": "Unsourced regulatory claims; overriding counsel opinion"
+    },
+    {
+      "role_id": "corporate_treasury",
+      "agent_name": "Victor",
+      "skill_path": "roles/corporate_treasury/SKILL.md",
+      "agent_path": "roles/corporate_treasury/AGENT.md",
+      "workflow_types": [
+        "deal_execution",
+        "eod_position_reporting",
+        "regulatory_inquiry"
+      ],
+      "typical_peers": [
+        "accounting",
+        "trader",
+        "legal"
+      ],
+      "constraint_scope": [
+        "funding",
+        "settlement",
+        "liquidity"
+      ],
+      "description": "Owns funding, cash, bank lines, and payment rails above the desk; confirms corporate can fund settlements and coordinates with accounting on timing and FX.",
+      "hard_boundary": "Wire instructions without dual-control policy"
+    },
+    {
+      "role_id": "it_platform",
+      "agent_name": "Nina",
+      "skill_path": "roles/it_platform/SKILL.md",
+      "agent_path": "roles/it_platform/AGENT.md",
+      "workflow_types": [
+        "systems_change_request",
+        "deal_execution"
+      ],
+      "typical_peers": [
+        "ops",
+        "risk_analyst",
+        "scheduler"
+      ],
+      "constraint_scope": [
+        "systems",
+        "change_management",
+        "access"
+      ],
+      "description": "Runs the systems layer under trading and scheduling: ETRM, market data feeds, access management, change windows, and incident coordination.",
+      "hard_boundary": "Production change outside approved window"
+    },
+    {
+      "role_id": "executive_office",
+      "agent_name": "Grace",
+      "skill_path": "roles/executive_office/SKILL.md",
+      "agent_path": "roles/executive_office/AGENT.md",
+      "workflow_types": [
+        "risk_escalation",
+        "deal_execution",
+        "regulatory_inquiry"
+      ],
+      "typical_peers": [
+        "desk_manager",
+        "compliance_officer",
+        "legal"
+      ],
+      "constraint_scope": [
+        "authority",
+        "capital",
+        "reputation"
+      ],
+      "description": "Represents senior management decisions above the desk manager: capital allocation, major policy exceptions, and final arbitration when desk and compliance disagree.",
+      "hard_boundary": "Legal filings or public statements without full chain of authority"
+    }
+  ],
+  "workflows": [
+    {
+      "workflow_type": "deal_execution",
+      "workflow_path": "workflows/deal_execution/WORKFLOW.md",
+      "participant_roles": [
+        "trader",
+        "risk_analyst",
+        "scheduler",
+        "legal",
+        "accounting",
+        "ops",
+        "desk_manager",
+        "corporate_treasury",
+        "compliance_officer",
+        "it_platform",
+        "executive_office"
+      ],
+      "summary": "Confirm physical trade; desk path plus treasury, compliance, IT, and exec touchpoints when material."
+    },
+    {
+      "workflow_type": "risk_escalation",
+      "workflow_path": "workflows/risk_escalation/WORKFLOW.md",
+      "participant_roles": [
+        "trader",
+        "risk_analyst",
+        "desk_manager",
+        "compliance_officer",
+        "executive_office"
+      ],
+      "summary": "Limit breach or policy exception \u2014 timed escalation through desk then compliance and executive tiers."
+    },
+    {
+      "workflow_type": "pipeline_nomination",
+      "workflow_path": "workflows/pipeline_nomination/WORKFLOW.md",
+      "participant_roles": [
+        "trader",
+        "scheduler",
+        "ops"
+      ],
+      "summary": "Nominate volumes on interstate / LDC pipes before operational cutoff."
+    },
+    {
+      "workflow_type": "eod_position_reporting",
+      "workflow_path": "workflows/eod_position_reporting/WORKFLOW.md",
+      "participant_roles": [
+        "risk_analyst",
+        "trader",
+        "accounting",
+        "corporate_treasury"
+      ],
+      "summary": "End-of-day positions; treasury liquidity view alongside desk and accounting."
+    },
+    {
+      "workflow_type": "counterparty_onboarding",
+      "workflow_path": "workflows/counterparty_onboarding/WORKFLOW.md",
+      "participant_roles": [
+        "legal",
+        "trader",
+        "accounting",
+        "compliance_officer"
+      ],
+      "summary": "Credit / KYC / policy alignment before first confirmed deal."
+    },
+    {
+      "workflow_type": "regulatory_inquiry",
+      "workflow_path": "workflows/regulatory_inquiry/WORKFLOW.md",
+      "participant_roles": [
+        "trader",
+        "compliance_officer",
+        "legal",
+        "risk_analyst",
+        "corporate_treasury",
+        "executive_office"
+      ],
+      "summary": "Regulatory or policy interpretation path outside the day-to-day trading line."
+    },
+    {
+      "workflow_type": "systems_change_request",
+      "workflow_path": "workflows/systems_change_request/WORKFLOW.md",
+      "participant_roles": [
+        "it_platform",
+        "ops",
+        "trader",
+        "risk_analyst",
+        "scheduler"
+      ],
+      "summary": "IT-led change with ops and desk acceptance and risk validation."
+    }
+  ]
+}

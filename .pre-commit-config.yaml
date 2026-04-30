@@ -1,0 +1,11 @@
+# Optional: pip install pre-commit && pre-commit install
+# Uses the same validator as scripts/git-hooks/pre-commit
+repos:
+  - repo: local
+    hooks:
+      - id: validate-agent-registry
+        name: Validate registry (roles/workflows vs registry.json)
+        entry: python3 scripts/validate_registry.py
+        language: system
+        pass_filenames: false
+        files: ^(registry/registry\.json|registry/registry\.schema\.json|roles/|workflows/|scripts/validate_registry\.py)$

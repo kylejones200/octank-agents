@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-04-30T12:00:00+00:00",
+  "artifacts": {
+    "available_data_catalog": "learning/AVAILABLE_DATA.md",
+    "inferred_tasks": "enron/inferred_tasks.jsonl",
+    "learning_manifest": "learning/last_run_manifest.json",
+    "orgnet_summary": "learning/orgnet_output/summary.json"
+  },
+  "agent_load_order": [
+    "learning/batch_context.json (this file)",
+    "learning/AVAILABLE_DATA.md",
+    "Each path in artifacts that is non-null (open and cite; do not invent metrics)",
+    "roles/<role>/SKILL.md and AGENT.md for the active agent",
+    "workflows/<type>/WORKFLOW.md for the active workflow_type"
+  ],
+  "notes": "Example shape after scripts/run_batch_analysis.sh (+ optional orgnet). orgnet_summary is often null until you wire orgnet batch output."
+}

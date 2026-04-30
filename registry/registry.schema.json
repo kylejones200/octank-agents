@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/digital-org/registry.schema.json",
+  "title": "Energy trading agent registry",
+  "type": "object",
+  "required": ["registry_version", "domain", "agents", "workflows"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "registry_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "domain": { "type": "string" },
+    "description": { "type": "string" },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role_id", "agent_name", "skill_path", "agent_path", "workflow_types"],
+        "properties": {
+          "role_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "agent_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "Human display name; maps to message envelope display_name when running."
+          },
+          "skill_path": { "type": "string" },
+          "agent_path": { "type": "string" },
+          "workflow_types": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "typical_peers": { "type": "array", "items": { "type": "string" } },
+          "constraint_scope": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["workflow_type", "workflow_path", "participant_roles"],
+        "properties": {
+          "workflow_type": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "workflow_path": { "type": "string" },
+          "participant_roles": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "summary": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/digital-org/run_manifest.schema.json",
+  "title": "Learning run manifest — data + agents + derived skills",
+  "type": "object",
+  "required": ["manifest_version", "generated_at", "data_sources", "agents_used", "learning_outputs"],
+  "properties": {
+    "manifest_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "application": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "repository": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "data_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "uri", "role_in_learning"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["parquet", "maildir", "mbox", "jsonl", "other"] },
+          "uri": { "type": "string", "description": "file:// path or stable id" },
+          "description": { "type": "string" },
+          "record_count": { "type": "integer", "minimum": 0 },
+          "content_sha256": { "type": "string" },
+          "role_in_learning": {
+            "type": "string",
+            "description": "e.g. primary_corpus, validation_holdout, thread_index"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "agents_used": {
+      "type": "array",
+      "description": "Registry agents whose definitions participated in learning (prompts, review, or synthesis).",
+      "items": {
+        "type": "object",
+        "required": ["role_id", "agent_name", "registry_paths"],
+        "properties": {
+          "role_id": { "type": "string" },
+          "agent_name": { "type": "string" },
+          "registry_paths": {
+            "type": "object",
+            "properties": {
+              "skill_path": { "type": "string" },
+              "agent_path": { "type": "string" }
+            },
+            "additionalProperties": true
+          },
+          "participation": {
+            "type": "string",
+            "description": "e.g. behavioral_template, reviewer, synthesis_target"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "workflow_types_observed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "learning_outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "uri"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["inferred_tasks", "skill_markdown", "hints_json", "rules_json", "report", "other"]
+          },
+          "uri": { "type": "string" },
+          "description": { "type": "string" },
+          "derived_from_manifest": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "skills_learned_or_updated": {
+      "type": "array",
+      "description": "Concrete SKILL.md (or equivalent) artifacts produced or revised from this run.",
+      "items": {
+        "type": "object",
+        "required": ["skill_path", "skill_version"],
+        "properties": {
+          "skill_path": { "type": "string" },
+          "skill_version": { "type": "string" },
+          "task_ids_sample": { "type": "array", "items": { "type": "string" } },
+          "method": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "method_summary": { "type": "string" },
+    "public_claims": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Short strings safe to show in-product (no PII)."
+    }
+  },
+  "additionalProperties": true
+}

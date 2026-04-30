@@ -1,0 +1,57 @@
+{
+  "$schema": "./run_manifest.schema.json",
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-04-30T22:00:00Z",
+  "application": {
+    "name": "Digital org desk (local)",
+    "version": "0.1.0",
+    "repository": "file:///path/to/your/repo"
+  },
+  "data_sources": [
+    {
+      "kind": "parquet",
+      "uri": "file:///Users/kylejonespatricia/Documents/email/emails.parquet",
+      "description": "Enron-style email export: file + message columns",
+      "record_count": 275203,
+      "role_in_learning": "primary_corpus"
+    },
+    {
+      "kind": "maildir",
+      "uri": "file:///Users/kylejonespatricia/Documents/email/maildir",
+      "description": "On-disk messages referenced by parquet file column",
+      "role_in_learning": "evidence_paths"
+    }
+  ],
+  "agents_used": [
+    {
+      "role_id": "trader",
+      "agent_name": "Morgan",
+      "registry_paths": {
+        "skill_path": "roles/trader/SKILL.md",
+        "agent_path": "roles/trader/AGENT.md"
+      },
+      "participation": "behavioral_template"
+    }
+  ],
+  "workflow_types_observed": ["deal_execution", "pipeline_nomination"],
+  "learning_outputs": [
+    {
+      "kind": "inferred_tasks",
+      "uri": "file:///path/to/repo/enron/inferred_tasks.jsonl",
+      "description": "Thread- and keyword-derived tasks aligned to registry workflows"
+    }
+  ],
+  "skills_learned_or_updated": [
+    {
+      "skill_path": "roles/trader/SKILL.md",
+      "skill_version": "0.2.0",
+      "task_ids_sample": ["task_enron_abc123"],
+      "method": "LLM synthesis from task bundle + PROMPT_TEMPLATES.md (example)"
+    }
+  ],
+  "method_summary": "Tasks inferred from corpus keywords and threading; agents from registry/registry.json; optional LLM step to draft SKILL updates with human review.",
+  "public_claims": [
+    "This build used the email datasets and agent definitions listed in learning/last_run_manifest.json.",
+    "New or updated skills reference that manifest and task evidence; versions are in SKILL.md front matter."
+  ]
+}
