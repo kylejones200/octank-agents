@@ -1,43 +1,68 @@
 # Agent headshots (`avatar_path`)
 
-Each file is **`{role_id}.png`**, referenced from [`registry/registry.json`](../../registry/registry.json) as `avatar_path` (repo-relative).
+PNG files are **`{role_id}.png`**, referenced from [`registry/registry.json`](../../registry/registry.json) as `avatar_path` (repo-relative).
 
-## Source sheet
+## Web / another tool
 
-The current PNGs were split from a single **2 rows × 5 columns** composite using:
+Outputs are **square headshots** (384×384 when using `labeled_headshot`) plus a JSON index:
+
+- **[`site-manifest.json`](site-manifest.json)** — `role_id`, `display_name`, `path`, `width`, `height` for each agent, plus `pool` entries for extra faces.
+- **[`WEB.md`](WEB.md)** — how a separate website or CDN should consume these files.
+
+After any split, refresh the index:
 
 ```bash
-# Recommended for “portrait + caption under oval” sheets (trims edges, pads cells,
-# keeps only the top ~76% of each cell so names/job titles are dropped):
+python3 scripts/emit_avatar_site_manifest.py
+```
+
+## Regenerate from a sprite sheet
+
+**Recommended** (trim + top band + **center square headshot** + resize):
+
+```bash
+python3 scripts/split_avatar_sheet.py \
+  --preset labeled_headshot \
+  --input "/path/to/combined-sheet.png" \
+  --out assets/avatars
+
+python3 scripts/emit_avatar_site_manifest.py
+```
+
+**Custom square size** (preset fixes 384×384): use sheet tuning + explicit headshot flags:
+
+```bash
 python3 scripts/split_avatar_sheet.py \
   --preset labeled_sheet \
+  --headshot --headshot-size 512 \
   --input "/path/to/combined-sheet.png" \
   --out assets/avatars
 ```
 
-Tune manually if needed: `--edge-trim-pct 1.5` (shrink full image before gridding),
-`--cell-pad-pct 5` (inset each cell to avoid neighbor bleed), `--portrait-top-pct 78`
-(keep only the top 78% of each cell’s height for the face).
+Optional **`--circle-mask`** with `--headshot` for transparent pixels outside a circle (square canvas).
 
-Agent order follows the **`agents` array order** in `registry.json` (row-major assignment: left-to-right, top row then bottom row).
+### Sheet-only tuning (no square crop)
+
+Use **`--preset labeled_sheet`** without `--headshot` if you need full rectangular cell crops.
+
+Agent order follows the **`agents` array order** in `registry.json` (row-major: left-to-right, top row then bottom).
 
 ## Eleven agents, ten cells
 
-This registry has **11** roles; a 2×5 sheet has **10** portraits. The **last grid cell** is duplicated for **`executive_office`** so every role has a file. Replace `executive_office.png` with a dedicated crop when you have one.
+This registry has **11** roles; a 2×5 sheet has **10** portraits. The **last grid cell** is duplicated for **`executive_office`**. Replace `executive_office.png` when you have an eleventh face.
 
 ## Art vs registry names
 
-Generated artwork may show different printed names than `agent_name` in the registry; the **mapping is positional** (registry order ↔ grid order). Re-run the splitter after reordering `agents` in JSON, or swap individual PNG files manually.
+Artwork labels may not match `agent_name`; **mapping is positional** (registry order ↔ grid order).
 
-## Extra faces (other people / instances)
+## Extra faces (pool)
 
-Additional 2×5 sheets can be split into **`assets/avatars/pool/`** as `tile_00.png` …
-for personas not mapped to a canonical `role_id` yet (extra desk seats, humans,
-placeholders). See [`pool/README.md`](pool/README.md) and [`pool/manifest.json`](pool/manifest.json).
+See [`pool/README.md`](pool/README.md) and [`pool/manifest.json`](pool/manifest.json).
 
 ```bash
 python3 scripts/split_avatar_sheet.py \
-  --preset labeled_sheet \
+  --preset labeled_headshot \
   --input "/path/to/second-sheet.png" \
   --pool-dir assets/avatars/pool
+
+python3 scripts/emit_avatar_site_manifest.py
 ```

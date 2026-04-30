@@ -16,9 +16,11 @@ titles on the source sheet (hints only — your runtime may rename freely).
 
 ```bash
 python3 scripts/split_avatar_sheet.py \
-  --preset labeled_sheet \
+  --preset labeled_headshot \
   --input "/path/to/new-composite.png" \
   --pool-dir assets/avatars/pool
+
+python3 scripts/emit_avatar_site_manifest.py
 ```
 
 Then update `manifest.json` if the people or order on the sheet changed. If faces

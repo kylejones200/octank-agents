@@ -10,9 +10,12 @@ last cell is duplicated for trailing roles.
 yet bound to a `role_id` — use for additional `agent_id` instances, humans-in-loop,
 or future registry rows.
 
-**Better crops:** ChatGPT-style sheets often have (1) outer whitespace, (2) text
-under each portrait, (3) tight spacing between cells. Use `--preset labeled_sheet`
-or tune `--edge-trim-pct`, `--cell-pad-pct`, and `--portrait-top-pct`.
+**Sheet tuning:** `--preset labeled_sheet` trims edges, pads cells, and keeps the
+top band of each cell to drop captions under portraits.
+
+**Web headshots (`--headshot` or `--preset labeled_headshot`):** after the cell
+crop, apply a **center square** (face-focused), optional **resize**, optional
+**circular alpha** — outputs are easy for another app or static site to consume.
 """
 
 from __future__ import annotations
@@ -23,18 +26,26 @@ import sys
 from pathlib import Path
 
 try:
-    from PIL import Image
+    from PIL import Image, ImageDraw
 except ImportError as e:  # pragma: no cover
     print("Install Pillow: pip install Pillow", file=sys.stderr)
     raise SystemExit(1) from e
 
 
-PRESETS: dict[str, dict[str, float]] = {
-    # Tuned for 2×5 “portrait + name + job title under oval” composites
+PRESETS: dict[str, dict[str, float | int | bool]] = {
     "labeled_sheet": {
         "edge_trim_pct": 1.25,
         "cell_pad_pct": 4.5,
-        "portrait_top_pct": 76.0,
+        "portrait_top_pct": 72.0,
+    },
+    # Same sheet tuning + square headshot pipeline for websites / design tools
+    "labeled_headshot": {
+        "edge_trim_pct": 1.25,
+        "cell_pad_pct": 4.5,
+        "portrait_top_pct": 72.0,
+        "headshot": True,
+        "headshot_size": 384,
+        "circle_mask": False,
     },
 }
 
@@ -105,6 +116,46 @@ def crop_cell(
     return img.crop(box)
 
 
+def square_center_crop(img: Image.Image) -> Image.Image:
+    """Smallest centered square — keeps head mass, drops wide oval margins."""
+    w, h = img.size
+    s = min(w, h)
+    left = (w - s) // 2
+    top = (h - s) // 2
+    return img.crop((left, top, left + s, top + s))
+
+
+def resize_square(img: Image.Image, size: int) -> Image.Image:
+    if size <= 0:
+        return img
+    return img.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def apply_circle_mask(img: Image.Image) -> Image.Image:
+    """Square RGBA image → transparent outside inscribed circle."""
+    w, h = img.size
+    if w != h:
+        img = square_center_crop(img)
+        w, h = img.size
+    mask = Image.new("L", (w, h), 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0, w - 1, h - 1), fill=255)
+    out = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    if img.mode != "RGBA":
+        img = img.convert("RGBA")
+    out.paste(img, (0, 0), mask)
+    return out
+
+
+def finalize_tile(img: Image.Image, *, headshot: bool, headshot_size: int, circle_mask: bool) -> Image.Image:
+    if headshot:
+        img = square_center_crop(img)
+        img = resize_square(img, headshot_size)
+    if circle_mask:
+        img = apply_circle_mask(img)
+    return img
+
+
 def apply_preset(args: argparse.Namespace) -> None:
     if not args.preset:
         return
@@ -113,9 +164,15 @@ def apply_preset(args: argparse.Namespace) -> None:
         print(f"Unknown --preset {args.preset!r}; choose from {list(PRESETS)}", file=sys.stderr)
         raise SystemExit(1)
     p = PRESETS[key]
-    args.edge_trim_pct = p["edge_trim_pct"]
-    args.cell_pad_pct = p["cell_pad_pct"]
-    args.portrait_top_pct = p["portrait_top_pct"]
+    args.edge_trim_pct = float(p["edge_trim_pct"])
+    args.cell_pad_pct = float(p["cell_pad_pct"])
+    args.portrait_top_pct = float(p["portrait_top_pct"])
+    if "headshot" in p:
+        args.headshot = bool(p["headshot"])
+    if "headshot_size" in p:
+        args.headshot_size = int(p["headshot_size"])
+    if "circle_mask" in p:
+        args.circle_mask = bool(p["circle_mask"])
 
 
 def run_pool(args: argparse.Namespace, img: Image.Image) -> int:
@@ -131,6 +188,12 @@ def run_pool(args: argparse.Namespace, img: Image.Image) -> int:
             cell_idx,
             cell_pad_pct=args.cell_pad_pct,
             portrait_top_pct=args.portrait_top_pct,
+        )
+        tile = finalize_tile(
+            tile,
+            headshot=args.headshot,
+            headshot_size=args.headshot_size,
+            circle_mask=args.circle_mask,
         )
         out_path = args.pool_dir / f"tile_{cell_idx:02d}.png"
         tile.save(out_path)
@@ -163,6 +226,12 @@ def run_registry(args: argparse.Namespace, img: Image.Image) -> int:
             cell_idx,
             cell_pad_pct=args.cell_pad_pct,
             portrait_top_pct=args.portrait_top_pct,
+        )
+        tile = finalize_tile(
+            tile,
+            headshot=args.headshot,
+            headshot_size=args.headshot_size,
+            circle_mask=args.circle_mask,
         )
         out_path = args.out / f"{rid}.png"
         tile.save(out_path)
@@ -199,7 +268,7 @@ def main() -> int:
         "--preset",
         type=str,
         default="",
-        help=f"Apply crop tuning preset ({', '.join(PRESETS)})",
+        help=f"Apply preset ({', '.join(PRESETS)})",
     )
     ap.add_argument(
         "--edge-trim-pct",
@@ -218,6 +287,23 @@ def main() -> int:
         type=float,
         default=100.0,
         help="Keep only top N%% of each cell height (drops captions under portraits; default 100)",
+    )
+    ap.add_argument(
+        "--headshot",
+        action="store_true",
+        help="After cell crop: center square + optional resize (web headshot)",
+    )
+    ap.add_argument(
+        "--headshot-size",
+        type=int,
+        default=0,
+        metavar="N",
+        help="If set with --headshot: resize to N×N pixels (0 = native square size)",
+    )
+    ap.add_argument(
+        "--circle-mask",
+        action="store_true",
+        help="With --headshot: transparent pixels outside a circle (square canvas)",
     )
     args = ap.parse_args()
 
