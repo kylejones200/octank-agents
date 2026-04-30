@@ -16,8 +16,10 @@ titles on the source sheet (hints only — your runtime may rename freely).
 
 ```bash
 python3 scripts/split_avatar_sheet.py \
+  --preset labeled_sheet \
   --input "/path/to/new-composite.png" \
   --pool-dir assets/avatars/pool
 ```
 
-Then update `manifest.json` if the people or order on the sheet changed.
+Then update `manifest.json` if the people or order on the sheet changed. If faces
+are still clipped, raise `--portrait-top-pct` toward `82` or lower `--cell-pad-pct`.

@@ -7,10 +7,17 @@ Each file is **`{role_id}.png`**, referenced from [`registry/registry.json`](../
 The current PNGs were split from a single **2 rows × 5 columns** composite using:
 
 ```bash
+# Recommended for “portrait + caption under oval” sheets (trims edges, pads cells,
+# keeps only the top ~76% of each cell so names/job titles are dropped):
 python3 scripts/split_avatar_sheet.py \
+  --preset labeled_sheet \
   --input "/path/to/combined-sheet.png" \
   --out assets/avatars
 ```
+
+Tune manually if needed: `--edge-trim-pct 1.5` (shrink full image before gridding),
+`--cell-pad-pct 5` (inset each cell to avoid neighbor bleed), `--portrait-top-pct 78`
+(keep only the top 78% of each cell’s height for the face).
 
 Agent order follows the **`agents` array order** in `registry.json` (row-major assignment: left-to-right, top row then bottom row).
 
@@ -30,6 +37,7 @@ placeholders). See [`pool/README.md`](pool/README.md) and [`pool/manifest.json`]
 
 ```bash
 python3 scripts/split_avatar_sheet.py \
+  --preset labeled_sheet \
   --input "/path/to/second-sheet.png" \
   --pool-dir assets/avatars/pool
 ```
