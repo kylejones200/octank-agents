@@ -1,7 +1,9 @@
 # Headshots for websites
 
 All role avatars are **square PNGs** (default **384×384** when built with
-`--preset labeled_headshot`). Pool tiles use the same pipeline.
+`--preset labeled_headshot`). They are **RGBA**; source art with transparent
+backgrounds (no white matte) is preserved outside the figure. Pool tiles use the
+same pipeline.
 
 ## Machine-readable index
 
