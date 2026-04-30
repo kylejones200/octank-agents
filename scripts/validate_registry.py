@@ -133,6 +133,11 @@ def main() -> int:
                         )
         if not isinstance(wts, list) or not wts:
             errors.append(f"Agent {rid}: workflow_types must be a non-empty array")
+        av = a.get("avatar_path")
+        if isinstance(av, str) and av.strip():
+            avp = root / av.strip()
+            if not avp.is_file():
+                errors.append(f"Agent {rid}: avatar_path not found: {av}")
 
     for a in agents:
         if not isinstance(a, dict):

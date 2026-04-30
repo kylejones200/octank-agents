@@ -24,6 +24,10 @@
           },
           "skill_path": { "type": "string" },
           "agent_path": { "type": "string" },
+          "avatar_path": {
+            "type": "string",
+            "description": "Optional repo-relative path to a headshot PNG (or other image) for UI / manifests."
+          },
           "workflow_types": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
           "typical_peers": { "type": "array", "items": { "type": "string" } },
           "constraint_scope": { "type": "array", "items": { "type": "string" } },

@@ -8,4 +8,4 @@ repos:
         entry: python3 scripts/validate_registry.py
         language: system
         pass_filenames: false
-        files: ^(registry/registry\.json|registry/registry\.schema\.json|roles/|workflows/|scripts/validate_registry\.py)$
+        files: ^(registry/registry\.json|registry/registry\.schema\.json|roles/|workflows/|assets/avatars/|scripts/validate_registry\.py)$

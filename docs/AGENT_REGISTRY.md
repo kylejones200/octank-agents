@@ -28,6 +28,7 @@ are allowed (e.g. two traders on different desks).
 | `skill_file` | Path to `SKILL.md` — identity, inputs, outputs |
 | `workflow_files` | Paths to `WORKFLOW.md` types this role may participate in |
 | `agent_file` | Path to `AGENT.md` — triggers, boundaries, templates |
+| `avatar_path` | Optional repo-relative image (e.g. `assets/avatars/<role_id>.png`) for UI or manifests |
 | `constraint_scope` | Subset of rule scopes that apply (see CONSTRAINT_ENGINE) |
 | `typical_peers` | Roles on the message bus this role most often addresses |
 | `hard_boundaries` | What must always route to exception queue (summary) |
@@ -113,7 +114,9 @@ See [`constraints/README.md`](../constraints/README.md) for the live stub layout
 ## Next steps for a real org
 
 1. Edit **`registry/registry.json`** when adding a role or workflow, then run
-   `python3 scripts/validate_registry.py`.
+   `python3 scripts/validate_registry.py`. Optional headshots: place PNGs under
+   `assets/avatars/` and set `avatar_path`, or regenerate from a sprite sheet via
+   `python3 scripts/split_avatar_sheet.py --input <combined.png>`.
 2. Keep `SKILL.md` / `AGENT.md` / `WORKFLOW.md` front matter `role_id` /
    `workflow_type` aligned with the registry (the validator enforces this).
 3. Add rules to the constraint engine with explicit `applies_to_roles`.

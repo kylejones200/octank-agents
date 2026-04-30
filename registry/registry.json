@@ -1,6 +1,6 @@
 {
   "$schema": "./registry.schema.json",
-  "registry_version": "0.4.1",
+  "registry_version": "0.4.2",
   "domain": "energy_trading",
   "description": "Physical gas / power desk plus corporate agents (compliance, treasury, IT, executive). Run scripts/validate_registry.py before commit.",
   "agents": [
@@ -30,8 +30,9 @@
         "position_limits",
         "counterparty"
       ],
-      "description": "Executes physical gas and power transactions \u2014 pricing, structuring, and deal terms with counterparties; coordinates scheduling and risk on confirmed deals.",
-      "hard_boundary": "New counterparty without credit; deal over signing authority"
+      "description": "Executes physical gas and power transactions — pricing, structuring, and deal terms with counterparties; coordinates scheduling and risk on confirmed deals.",
+      "hard_boundary": "New counterparty without credit; deal over signing authority",
+      "avatar_path": "assets/avatars/trader.png"
     },
     {
       "role_id": "risk_analyst",
@@ -56,7 +57,8 @@
         "deal_execution"
       ],
       "description": "Monitors positions and limits by hub and book, validates deal risk, produces EOD summaries, and drives escalation when limits or policies are breached.",
-      "hard_boundary": "Waiving a regulatory reporting requirement"
+      "hard_boundary": "Waiving a regulatory reporting requirement",
+      "avatar_path": "assets/avatars/risk_analyst.png"
     },
     {
       "role_id": "scheduler",
@@ -78,7 +80,8 @@
         "nomination"
       ],
       "description": "Translates confirmed deals into pipeline and LDC nominations, tracks operator confirmations, and coordinates timing against pipeline cutoffs and imbalances.",
-      "hard_boundary": "Nomination after cutoff without documented override"
+      "hard_boundary": "Nomination after cutoff without documented override",
+      "avatar_path": "assets/avatars/scheduler.png"
     },
     {
       "role_id": "legal",
@@ -101,7 +104,8 @@
         "deal_execution"
       ],
       "description": "Owns counterparty eligibility, master agreements, credit limits, and legal clearance for deals that exceed authority or involve new entities.",
-      "hard_boundary": "Binding legal commitment without human signatory"
+      "hard_boundary": "Binding legal commitment without human signatory",
+      "avatar_path": "assets/avatars/legal.png"
     },
     {
       "role_id": "accounting",
@@ -124,7 +128,8 @@
         "deal_execution"
       ],
       "description": "Maps confirmed deals to settlements and accruals; reconciles pipeline statements and desk P&L inputs; supports audit trail completeness.",
-      "hard_boundary": "Posting outside reconciliation window"
+      "hard_boundary": "Posting outside reconciliation window",
+      "avatar_path": "assets/avatars/accounting.png"
     },
     {
       "role_id": "ops",
@@ -146,7 +151,8 @@
         "physical_ops"
       ],
       "description": "Monitors actual flows, imbalances, and operator communications; supports scheduler with confirmations and physical exceptions such as curtailments and OFOs.",
-      "hard_boundary": "Physical hazard or safety-related events"
+      "hard_boundary": "Physical hazard or safety-related events",
+      "avatar_path": "assets/avatars/ops.png"
     },
     {
       "role_id": "desk_manager",
@@ -168,7 +174,8 @@
         "exceptions"
       ],
       "description": "Owns desk P&L and risk culture; approves temporary limit exceptions within committee rules; resolves cross-book conflicts and stalled escalations.",
-      "hard_boundary": "Permanent limit changes and regulatory submissions"
+      "hard_boundary": "Permanent limit changes and regulatory submissions",
+      "avatar_path": "assets/avatars/desk_manager.png"
     },
     {
       "role_id": "compliance_officer",
@@ -192,7 +199,8 @@
         "surveillance"
       ],
       "description": "Interprets regulatory and firm policy for the trading organization: filings, surveillance posture, and read-across from desk activity to control libraries.",
-      "hard_boundary": "Unsourced regulatory claims; overriding counsel opinion"
+      "hard_boundary": "Unsourced regulatory claims; overriding counsel opinion",
+      "avatar_path": "assets/avatars/compliance_officer.png"
     },
     {
       "role_id": "corporate_treasury",
@@ -215,7 +223,8 @@
         "liquidity"
       ],
       "description": "Owns funding, cash, bank lines, and payment rails above the desk; confirms corporate can fund settlements and coordinates with accounting on timing and FX.",
-      "hard_boundary": "Wire instructions without dual-control policy"
+      "hard_boundary": "Wire instructions without dual-control policy",
+      "avatar_path": "assets/avatars/corporate_treasury.png"
     },
     {
       "role_id": "it_platform",
@@ -237,7 +246,8 @@
         "access"
       ],
       "description": "Runs the systems layer under trading and scheduling: ETRM, market data feeds, access management, change windows, and incident coordination.",
-      "hard_boundary": "Production change outside approved window"
+      "hard_boundary": "Production change outside approved window",
+      "avatar_path": "assets/avatars/it_platform.png"
     },
     {
       "role_id": "executive_office",
@@ -260,7 +270,8 @@
         "reputation"
       ],
       "description": "Represents senior management decisions above the desk manager: capital allocation, major policy exceptions, and final arbitration when desk and compliance disagree.",
-      "hard_boundary": "Legal filings or public statements without full chain of authority"
+      "hard_boundary": "Legal filings or public statements without full chain of authority",
+      "avatar_path": "assets/avatars/executive_office.png"
     }
   ],
   "workflows": [
@@ -292,7 +303,7 @@
         "compliance_officer",
         "executive_office"
       ],
-      "summary": "Limit breach or policy exception \u2014 timed escalation through desk then compliance and executive tiers."
+      "summary": "Limit breach or policy exception — timed escalation through desk then compliance and executive tiers."
     },
     {
       "workflow_type": "pipeline_nomination",
