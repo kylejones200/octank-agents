@@ -1,0 +1,56 @@
+{
+  "description": "Extra headshots not bound to registry role_id. Artwork labels (sheet 2); map to agent_id or humans in your runtime as needed.",
+  "layout": { "rows": 2, "cols": 5, "order": "row-major (left-to-right, top then bottom)" },
+  "tiles": [
+    {
+      "file": "tile_00.png",
+      "portrait_label": "Julia Bennett",
+      "hint_title": "Treasury Manager"
+    },
+    {
+      "file": "tile_01.png",
+      "portrait_label": "Kevin Liu",
+      "hint_title": "IT Systems Analyst"
+    },
+    {
+      "file": "tile_02.png",
+      "portrait_label": "Nina Thompson",
+      "hint_title": "Data Analyst"
+    },
+    {
+      "file": "tile_03.png",
+      "portrait_label": "Tyler Morgan",
+      "hint_title": "Credit Analyst"
+    },
+    {
+      "file": "tile_04.png",
+      "portrait_label": "Isabella Garcia",
+      "hint_title": "Compliance Analyst"
+    },
+    {
+      "file": "tile_05.png",
+      "portrait_label": "Brandon Lee",
+      "hint_title": "FP&A Manager"
+    },
+    {
+      "file": "tile_06.png",
+      "portrait_label": "Maria Sanchez",
+      "hint_title": "Commercial Analyst"
+    },
+    {
+      "file": "tile_07.png",
+      "portrait_label": "Jacob Anderson",
+      "hint_title": "Operations Analyst"
+    },
+    {
+      "file": "tile_08.png",
+      "portrait_label": "Sophia Patel",
+      "hint_title": "HR Manager"
+    },
+    {
+      "file": "tile_09.png",
+      "portrait_label": "Matthew Collins",
+      "hint_title": "Executive Assistant"
+    }
+  ]
+}

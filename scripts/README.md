@@ -3,7 +3,7 @@
 | Command | Purpose |
 |---|---|
 | `python3 scripts/validate_registry.py` | Check `registry/registry.json` vs `roles/` and `workflows/` (paths, front matter, participation rules, optional `avatar_path`). Exit non-zero on error. |
-| `python3 scripts/split_avatar_sheet.py --input <sheet.png>` | Crop a uniform `rows×cols` sprite sheet (default 2×5) into `assets/avatars/<role_id>.png` in registry order; duplicates the last tile if there are more agents than cells. |
+| `python3 scripts/split_avatar_sheet.py --input <sheet.png>` | **Registry mode:** crop into `assets/avatars/<role_id>.png` (default 2×5, registry order). **Pool mode:** add `--pool-dir assets/avatars/pool` to emit `tile_00.png`… for extra people / instances (no registry writes). |
 | `./scripts/smoke_pipeline.sh` | Registry validate → small corpus task infer → smoke manifest → smoke `batch_context` (writes under `corpus/_smoke_*`, `learning/_smoke_*`). |
 | `./scripts/run_batch_analysis.sh` | Full batch: infer tasks, emit `learning/last_run_manifest.json`, write `learning/batch_context.json` (requires corpus; manifest is gitignored). |
 | `./scripts/install-git-hooks.sh` | Install repo `pre-commit` hook that runs the registry validator. |

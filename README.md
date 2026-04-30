@@ -33,5 +33,5 @@ Commands and pipelines: **[scripts/README.md](scripts/README.md)**. Full doc lis
 | `registry/` | `registry.json` + JSON Schema |
 | `constraints/` | Stub for future rule packs (see `constraints/README.md`) |
 | `corpus/`, `learning/` | Corpus config and hints, learning manifests (generated files gitignored) |
-| `assets/avatars/` | Optional headshot PNGs per `role_id`; `registry.json` → `avatar_path` |
+| `assets/avatars/` | Headshots per `role_id` (`avatar_path`); [`pool/`](assets/avatars/pool/) has extra `tile_XX.png` for other people / instances |
 | `scripts/` | Validation, corpus helpers, hooks |

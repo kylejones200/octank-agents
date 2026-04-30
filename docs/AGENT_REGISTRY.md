@@ -116,7 +116,9 @@ See [`constraints/README.md`](../constraints/README.md) for the live stub layout
 1. Edit **`registry/registry.json`** when adding a role or workflow, then run
    `python3 scripts/validate_registry.py`. Optional headshots: place PNGs under
    `assets/avatars/` and set `avatar_path`, or regenerate from a sprite sheet via
-   `python3 scripts/split_avatar_sheet.py --input <combined.png>`.
+   `python3 scripts/split_avatar_sheet.py --input <combined.png>`. Extra faces for
+   additional instances or non-registry personas live under `assets/avatars/pool/`
+   (`tile_*.png` + `manifest.json`).
 2. Keep `SKILL.md` / `AGENT.md` / `WORKFLOW.md` front matter `role_id` /
    `workflow_type` aligned with the registry (the validator enforces this).
 3. Add rules to the constraint engine with explicit `applies_to_roles`.
